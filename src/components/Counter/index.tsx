@@ -19,10 +19,7 @@ export const Counter: React.FC<CounterProps> = ({ initialCount }) => {
 
 	useEffect(() => {
 		console.log('Componente atualizado!');
-        window.dispatchEvent(new CustomEvent("onCounterUpdate", {
-        detail: {
-          count, // Passando o valor atualizado do contador
-        }}));
+        window.dispatchEvent(new CustomEvent("onCounterUpdate"));
 	});
 
 	const handleIncrement = () => {
