@@ -32,15 +32,16 @@ export default function Lista() {
 	}, []);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.content}>
-				<h2>Lista de usuários</h2>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h2>Lista de usuários</h2>
 
-				<div data-list-container>
-					{/* Exemplo */}
-					<div data-list-item>ID 323 - Usuário 323 (user-323@mail.com)</div>
-				</div>
-			</div>
-		</div>
-	);
+        <div data-list-container>
+          {users.map((e) => (
+            <div data-list-item>ID {e.id} - {e.name} ({e.email})</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -10,12 +10,33 @@
  * - Utilize a interface IUser para tipar os dados
  */
 
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import { NextApiRequest, NextApiResponse } from "next/types";
 
-import { IUser } from '@/types/user.d';
+import { IUser } from "@/types/user.d";
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-	const users: Array<unknown> = [];
+  if (req.method !== "GET") {
+    res.status(405).json({error: "Método não permitido"});
+    return;
+  }
 
-	return res.status(500).json(users);
+  const users: Array<IUser> = [
+    {
+      id: 0,
+      name: "Vinicius",
+      email: "viniciusgrp@gmail.com",
+    },
+    {
+      id: 1,
+      name: "Beto",
+      email: "beto@mail.com",
+    },
+    {
+      id: 2,
+      name: "Clara",
+      email: "clara@bird.com",
+    },
+  ];
+
+  return res.status(200).json(users);
 };

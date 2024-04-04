@@ -10,12 +10,25 @@
  * - Você deve corrigir a interface IUserCreate em src/types/user.d.ts
  */
 
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import { NextApiRequest, NextApiResponse } from "next/types";
 
-import { IUser, IUserCreate } from '@/types/user.d';
+import { IUser, IUserCreate } from "@/types/user.d";
 
 const users: IUser[] = [];
 
+let id = 0;
+
 export default (req: NextApiRequest, res: NextApiResponse) => {
-	return res.status(400).json(undefined);
+  if (req.method !== "POST") {
+    res.status(405).send("Método não permitido");
+    return;
+  }
+
+  const user: IUserCreate = req.body;
+
+  users.push({ ...user, id });
+
+  id++;
+
+  return res.status(201).json(user);
 };
